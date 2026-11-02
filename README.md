@@ -9,9 +9,9 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Playwright tutorial step 4 completed on 2026-11-02. Added the two UI test support classes and removed the old `FirstStepsTest`. A clean compile passes. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md) and [step 4 notes](docs/playwright-step-4.md).
+Playwright tutorial step 5 completed on 2026-11-02. `PlaywrightTutorialTest` now checks the setup page and plays TC-P1 by filling the form, ticking the potion box and clicking Power Strike. Both UI tests pass. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md), [step 4 notes](docs/playwright-step-4.md) and [step 5 notes](docs/playwright-step-5.md).
 
-The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. The new support classes compile, but there is no UI test using them yet. Step 5 will add `PlaywrightTutorialTest`.
+The UI test result is **2 tests, 0 failures, 0 errors, 0 skipped**. The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The unit-test failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged.
 
 ## TD2 source and defect counts
 
@@ -41,7 +41,7 @@ Use JDK 17 and the included Maven Wrapper. From `battle-arena`, run on Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-For the unit-test baseline only, use `.\mvnw.cmd test '-Dtest=com.isep.battlearena.service.*Test'`. At this step, a plain `test` also runs only the existing unit tests. To compile without running tests, use `.\mvnw.cmd test-compile`. `FirstStepsTest` was removed after step 3; its code is still in the Git history.
+For the unit-test baseline only, use `.\mvnw.cmd test '-Dtest=com.isep.battlearena.service.*Test'`. For the two UI tests only, use `.\mvnw.cmd test '-Dtest=PlaywrightTutorialTest'`. The UI tests start their own app on a free port; `spring-boot:run` is only needed for manual play. A plain `test` selects both groups and reports the known unit-test failures. To compile without running tests, use `.\mvnw.cmd test-compile`. `FirstStepsTest` was removed after step 3; its code is still in the Git history.
 
 On Linux / macOS, use `./mvnw` instead. The application runs at http://localhost:8080.
 
