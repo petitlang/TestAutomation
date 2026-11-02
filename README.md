@@ -9,9 +9,9 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Playwright tutorial step 3 completed on 2026-11-02. The first browser test passes. We also tried a wrong title and a stopped app, read both errors, then restored the test and ran it successfully again. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md) and [step 3 notes](docs/playwright-step-3.md).
+Playwright tutorial step 4 completed on 2026-11-02. Added the two UI test support classes and removed the old `FirstStepsTest`. A clean compile passes. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md) and [step 4 notes](docs/playwright-step-4.md).
 
-The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. Running only `FirstStepsTest` gives **1 test, 0 failures, 0 errors, 0 skipped**, with the app running on port 8080.
+The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. The new support classes compile, but there is no UI test using them yet. Step 5 will add `PlaywrightTutorialTest`.
 
 ## TD2 source and defect counts
 
@@ -41,7 +41,7 @@ Use JDK 17 and the included Maven Wrapper. From `battle-arena`, run on Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-For the unit-test baseline only, use `.\mvnw.cmd test '-Dtest=com.isep.battlearena.service.*Test'`. A plain `test` now also selects `FirstStepsTest`, which needs the app running on port 8080. To compile without running tests, use `.\mvnw.cmd test-compile`.
+For the unit-test baseline only, use `.\mvnw.cmd test '-Dtest=com.isep.battlearena.service.*Test'`. At this step, a plain `test` also runs only the existing unit tests. To compile without running tests, use `.\mvnw.cmd test-compile`. `FirstStepsTest` was removed after step 3; its code is still in the Git history.
 
 On Linux / macOS, use `./mvnw` instead. The application runs at http://localhost:8080.
 

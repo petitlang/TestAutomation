@@ -4,7 +4,7 @@ Date: 2026-11-02. Java: 17.0.18.
 
 ## 1. Write the first test
 
-Added [`FirstStepsTest.java`](../battle-arena/src/test/java/com/isep/battlearena/tutorial/FirstStepsTest.java) under `src/test/java/com/isep/battlearena/tutorial`.
+Added [`FirstStepsTest.java`](https://github.com/petitlang/TestAutomation/blob/9d5b85a5625305cbd31c99965b08feb9be5d1ff9/battle-arena/src/test/java/com/isep/battlearena/tutorial/FirstStepsTest.java) under `src/test/java/com/isep/battlearena/tutorial`. This link shows the step 2 version; the file is removed in step 4.
 
 The test opens http://localhost:8080 and checks that the `h1` heading says `Battle Arena`.
 
