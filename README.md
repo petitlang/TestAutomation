@@ -9,7 +9,7 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Archived on 2026-11-02, before starting the Playwright tutorial.
+Playwright tutorial step 1 completed on 2026-11-02: the existing unit tests were checked and TC-P1 was played in the browser. See the [step 1 notes](docs/playwright-step-1.md).
 
 The existing unit-test baseline is **46 tests, 9 failures, 0 errors, 0 skipped**. The failures detect deliberate application defects and are expected for this coursework. Application sources under `src/main` must remain unchanged. Playwright has not been added yet.
 
