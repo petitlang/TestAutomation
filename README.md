@@ -9,9 +9,9 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Playwright tutorial step 1 completed on 2026-11-02: the existing unit tests were checked and TC-P1 was played in the browser. See the [step 1 notes](docs/playwright-step-1.md).
+Playwright tutorial step 2 completed on 2026-11-02. We wrote the first browser test, saw the missing-library error, added Playwright and compiled again. The build now passes. See the [step 1 notes](docs/playwright-step-1.md) and [step 2 notes](docs/playwright-step-2.md).
 
-The existing unit-test baseline is **46 tests, 9 failures, 0 errors, 0 skipped**. The failures detect deliberate application defects and are expected for this coursework. Application sources under `src/main` must remain unchanged. Playwright has not been added yet.
+The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. `FirstStepsTest` compiles, but we have not run it yet. Running the browser test is step 3.
 
 ## TD2 source and defect counts
 
@@ -40,6 +40,8 @@ Use JDK 17 and the included Maven Wrapper. From `battle-arena`, run on Windows:
 .\mvnw.cmd test
 .\mvnw.cmd spring-boot:run
 ```
+
+For the unit-test baseline only, use `.\mvnw.cmd test '-Dtest=com.isep.battlearena.service.*Test'`. A plain `test` now also selects `FirstStepsTest`, which needs the app running on port 8080. To compile without running tests, use `.\mvnw.cmd test-compile`.
 
 On Linux / macOS, use `./mvnw` instead. The application runs at http://localhost:8080.
 
