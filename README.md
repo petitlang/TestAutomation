@@ -9,9 +9,9 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Playwright tutorial step 2 completed on 2026-11-02. We wrote the first browser test, saw the missing-library error, added Playwright and compiled again. The build now passes. See the [step 1 notes](docs/playwright-step-1.md) and [step 2 notes](docs/playwright-step-2.md).
+Playwright tutorial step 3 completed on 2026-11-02. The first browser test passes. We also tried a wrong title and a stopped app, read both errors, then restored the test and ran it successfully again. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md) and [step 3 notes](docs/playwright-step-3.md).
 
-The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. `FirstStepsTest` compiles, but we have not run it yet. Running the browser test is step 3.
+The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged. Running only `FirstStepsTest` gives **1 test, 0 failures, 0 errors, 0 skipped**, with the app running on port 8080.
 
 ## TD2 source and defect counts
 
