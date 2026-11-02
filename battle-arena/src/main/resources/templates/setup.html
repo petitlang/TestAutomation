@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Battle Arena - Setup</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page setup-page">
+    <h1>Battle Arena</h1>
+    <p class="subtitle">TD2 sample application - Test and Test Automation, ISEP</p>
+
+    <form th:action="@{/start}" method="post" class="setup-form">
+        <div class="fighter-setup">
+            <h2>Fighter 1</h2>
+            <label>Name
+                <input type="text" name="f1Name" value="Aria" required maxlength="20">
+            </label>
+            <label>Class
+                <select name="f1Class">
+                    <option value="RECRUIT">Recruit (+0% damage)</option>
+                    <option value="ROGUE">Rogue (+5% damage)</option>
+                    <option value="MAGE">Mage (+10% damage)</option>
+                    <option value="WARRIOR" selected>Warrior (+15% damage)</option>
+                </select>
+            </label>
+            <label>Attack power (1-100)
+                <input type="number" name="f1AttackPower" value="60" min="1" max="100" required>
+            </label>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="fighter-setup">
+            <h2>Fighter 2</h2>
+            <label>Name
+                <input type="text" name="f2Name" value="Bram" required maxlength="20">
+            </label>
+            <label>Class
+                <select name="f2Class">
+                    <option value="RECRUIT">Recruit (+0% damage)</option>
+                    <option value="ROGUE" selected>Rogue (+5% damage)</option>
+                    <option value="MAGE">Mage (+10% damage)</option>
+                    <option value="WARRIOR">Warrior (+15% damage)</option>
+                </select>
+            </label>
+            <label>Attack power (1-100)
+                <input type="number" name="f2AttackPower" value="45" min="1" max="100" required>
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-start">Start Battle</button>
+    </form>
+</div>
+</body>
+</html>

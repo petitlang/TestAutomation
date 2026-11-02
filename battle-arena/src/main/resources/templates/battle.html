@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Battle Arena - Fight</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body th:data-f1-name="${fighter1.name}" th:data-f2-name="${fighter2.name}">
+<div class="page battle-page">
+
+    <div id="match-banner" class="match-banner hidden"></div>
+
+    <div class="arena">
+        <section class="fighter-panel" id="fighter1-panel">
+            <h2 id="fighter1-name" th:text="${fighter1.name}">Fighter 1</h2>
+            <p class="class-label" id="fighter1-class" th:text="${fighter1.characterClass}">CLASS</p>
+            <div class="bar hp-bar">
+                <div class="bar-fill hp-fill" id="fighter1-hp-fill" style="width:100%"></div>
+                <span class="bar-label" id="fighter1-hp-value" th:text="${fighter1.hp}">100</span>
+            </div>
+            <div class="bar mana-bar">
+                <div class="bar-fill mana-fill" id="fighter1-mana-fill" style="width:100%"></div>
+                <span class="bar-label" id="fighter1-mana-value" th:text="${fighter1.mana}">100</span>
+            </div>
+        </section>
+
+        <div class="vs">VS</div>
+
+        <section class="fighter-panel" id="fighter2-panel">
+            <h2 id="fighter2-name" th:text="${fighter2.name}">Fighter 2</h2>
+            <p class="class-label" id="fighter2-class" th:text="${fighter2.characterClass}">CLASS</p>
+            <div class="bar hp-bar">
+                <div class="bar-fill hp-fill" id="fighter2-hp-fill" style="width:100%"></div>
+                <span class="bar-label" id="fighter2-hp-value" th:text="${fighter2.hp}">100</span>
+            </div>
+            <div class="bar mana-bar">
+                <div class="bar-fill mana-fill" id="fighter2-mana-fill" style="width:100%"></div>
+                <span class="bar-label" id="fighter2-mana-value" th:text="${fighter2.mana}">100</span>
+            </div>
+        </section>
+    </div>
+
+    <p id="active-fighter-indicator" class="active-indicator"></p>
+
+    <div class="controls">
+        <button id="attack-quick" class="btn btn-attack" data-attack-type="QUICK_STRIKE">
+            Quick Strike <span class="mana-cost">(0 mana)</span>
+        </button>
+        <button id="attack-power" class="btn btn-attack" data-attack-type="POWER_STRIKE">
+            Power Strike <span class="mana-cost">(15 mana)</span>
+        </button>
+        <button id="attack-fireball" class="btn btn-attack" data-attack-type="FIREBALL">
+            Fireball <span class="mana-cost">(25 mana)</span>
+        </button>
+
+        <label class="potion-toggle">
+            <input type="checkbox" id="use-potion-checkbox">
+            Use power potion (+10% damage this attack)
+        </label>
+    </div>
+
+    <div id="battle-log" class="battle-log"></div>
+
+    <button id="reset-button" class="btn btn-reset hidden">Rematch</button>
+</div>
+
+<script th:src="@{/js/battle.js}"></script>
+</body>
+</html>
