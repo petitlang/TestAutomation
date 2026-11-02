@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: com.isep.battlearena.tutorial.PlaywrightTutorialTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 21.00 s <<< FAILURE! -- in com.isep.battlearena.tutorial.PlaywrightTutorialTest
+com.isep.battlearena.tutorial.PlaywrightTutorialTest.aWarriorUsingAPotionIsCappedAtTwentyPercent -- Time elapsed: 10.21 s <<< FAILURE!
+org.opentest4j.AssertionFailedError:
+Locator expected to have text
+Expected: 25
+Received: 28
+
+Call log:
+  - Assert "hasText" locator("#fighter2-hp-value") with timeout 5000ms
+  - waiting for locator("#fighter2-hp-value")
+    2 × locator resolved to <span class="bar-label" id="fighter2-hp-value">100</span>
+      - unexpected value "100"
+    12 × locator resolved to <span class="bar-label" id="fighter2-hp-value">28</span>
+       - unexpected value "28"
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:81)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:39)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.hasText(LocatorAssertionsImpl.java:303)
+	at com.microsoft.playwright.assertions.LocatorAssertions.hasText(LocatorAssertions.java:1996)
+	at com.isep.battlearena.tutorial.PlaywrightTutorialTest.aWarriorUsingAPotionIsCappedAtTwentyPercent(PlaywrightTutorialTest.java:32)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)

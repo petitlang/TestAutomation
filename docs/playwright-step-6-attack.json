@@ -1,0 +1,38 @@
+{
+  "method": "POST",
+  "path": "/api/attack",
+  "status": 200,
+  "request": {
+    "attackType": "POWER_STRIKE",
+    "usePowerPotion": true
+  },
+  "response": {
+    "lastResult": {
+      "attackPerformed": true,
+      "failureReason": null,
+      "attackerName": "Aria",
+      "defenderName": "Bram",
+      "damage": 72,
+      "criticalHit": false,
+      "defenderHpAfter": 28,
+      "attackerManaAfter": 85
+    },
+    "fighter1": {
+      "name": "Aria",
+      "characterClass": "WARRIOR",
+      "hp": 100,
+      "mana": 85,
+      "attackPower": 40
+    },
+    "fighter2": {
+      "name": "Bram",
+      "characterClass": "ROGUE",
+      "hp": 28,
+      "mana": 100,
+      "attackPower": 45
+    },
+    "activeFighterName": "Bram",
+    "matchState": "IN_PROGRESS",
+    "winnerName": null
+  }
+}

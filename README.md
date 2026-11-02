@@ -9,7 +9,7 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 ## Current checkpoint
 
-Playwright tutorial step 5 completed on 2026-11-02. `PlaywrightTutorialTest` now checks the setup page and plays TC-P1 by filling the form, ticking the potion box and clicking Power Strike. Both UI tests pass. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md), [step 4 notes](docs/playwright-step-4.md) and [step 5 notes](docs/playwright-step-5.md).
+Playwright tutorial step 6 completed on 2026-11-02. We changed the expected HP to 25, read the failure and trace, then restored 28. Both UI tests pass again. The failed and passing traces are saved separately. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md), [step 4 notes](docs/playwright-step-4.md), [step 5 notes](docs/playwright-step-5.md) and [step 6 notes](docs/playwright-step-6.md).
 
 The UI test result is **2 tests, 0 failures, 0 errors, 0 skipped**. The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The unit-test failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged.
 
