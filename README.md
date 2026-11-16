@@ -6,8 +6,33 @@ ISEP Test and Test Automation coursework archive by Mouzheng Li.
 
 - [`battle-arena/`](battle-arena/): the Maven / Java Battle Arena project, including the completed TD3a unit tests and JaCoCo configuration.
 - [`TD3a_Deliverables_Mouzheng.xlsx`](TD3a_Deliverables_Mouzheng.xlsx): the TD3a deliverables workbook.
+- [`TD3b_Deliverables_Student.xlsx`](TD3b_Deliverables_Student.xlsx): the TD3b results, failure analysis, questions and ROI.
+- [`TD3b_JMeter_Report.zip`](TD3b_JMeter_Report.zip): the TD3b JMeter HTML report. Extract it and open `jmeter-report/index.html`.
+- [`TD3b_Submission_Mouzheng.zip`](TD3b_Submission_Mouzheng.zip): the project, completed workbook and zipped JMeter report for submission.
 
-## Current checkpoint
+## TD3b
+
+Required steps 0 to 7 are complete. See the [step notes](docs/td3b-progress.md). The workbook contains the required report and answers. The optional tracks stay as provided in the teacher's pack.
+
+The final suite reports 77 tests, 11 failures, 0 errors and 4 skipped optional tests. That is 73 executed runs, including the 6 tutorial runs. The failures are the 9 known unit cases and the 2 expected UI cases.
+
+From `battle-arena`, run the whole suite with JDK 17 and Chrome installed.
+
+```powershell
+.\mvnw.cmd test '-Dmaven.test.failure.ignore=true'
+```
+
+The application contains course defects. Read the test totals even when this command ends with BUILD SUCCESS. Reports are in `target/surefire-reports`, traces in `target/traces`, and coverage in `target/site/jacoco/index.html`.
+
+For JMeter, restart the application with `.\mvnw.cmd spring-boot:run`. In another terminal, run the following command with an empty or new output folder.
+
+```powershell
+jmeter -n -t jmeter/battle-arena-api.jmx -l target/jmeter/td3b/results.jtl -e -o target/jmeter/td3b/report
+```
+
+The final plan checks the specification and deliberately reports sample 05 as failed. The console has 9 samplers, while the HTML report has 11 rows because it also saves two redirect sub-results.
+
+## Tutorial checkpoint
 
 All seven steps of the Playwright tutorial are complete as of 2026-11-02. The UI class has six passing test runs: the setup page, TC-P1 and four data rows. The failed HP experiment from step 6 is restored, and its trace is saved separately. See the [step 1 notes](docs/playwright-step-1.md), [step 2 notes](docs/playwright-step-2.md), [step 3 notes](docs/playwright-step-3.md), [step 4 notes](docs/playwright-step-4.md), [step 5 notes](docs/playwright-step-5.md), [step 6 notes](docs/playwright-step-6.md) and [step 7 notes](docs/playwright-step-7.md).
 

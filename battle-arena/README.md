@@ -4,6 +4,14 @@ Sample application of the ISEP course *Test and Test Automation* (II. 3525), use
 **TD3a** (unit tests, code coverage and the Maven POM) and **TD3b** (UI tests, API tests and summary). It is a small
 turn-based combat game that exists only so you have a realistic, running piece of software to test.
 
+## Completed TD3b work
+
+Required steps 0 to 7 are complete. The final Maven run reports 77 tests, 11 failures, 0 errors and 4 skipped optional tests. The 11 failures are 9 known unit failures and 2 UI failures for the critical threshold and Rogue bonus.
+
+With JDK 17 and Chrome installed, run the suite with `mvnw.cmd test -Dmaven.test.failure.ignore=true` on Windows, or `./mvnw test -Dmaven.test.failure.ignore=true` on Linux and macOS. Read the totals in `target/surefire-reports` even when the build ends with BUILD SUCCESS. Traces are in `target/traces` and coverage is in `target/site/jacoco/index.html`.
+
+For JMeter, restart the app, then run `jmeter -n -t jmeter/battle-arena-api.jmx -l target/jmeter/results.jtl -e -o target/jmeter/report` from this folder. Use a new result name and report folder each time. Sample 05 fails because the specified Rogue damage is 58 while the app returns 55. The report ZIP and completed workbook are beside this project in the submission package.
+
 ## What this is for
 
 You will not be modifying this application (`src/main`). In TD2 you read its source code, designed test cases and reported

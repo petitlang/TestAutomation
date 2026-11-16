@@ -51,3 +51,17 @@ Completed the journey with an explicit URL wait and HP wait. Both tests passed w
 Removed only the HP wait and repeated the journey 10 times, with a fresh browser and match each time. Nine passed; one read the old HP 100 instead of 8. The JUnit XML and class result count all 10 repetitions; Maven's final failure summary groups the repeated method under one name. Restoring the wait gave 2 passing tests again.
 
 The compared journey methods each have 7 statements. The workbook times are method times: 0.517 s for Playwright TC-P1 in the step 4 suite and 2.383 s for the headless Selenium journey. Their data and assertions differ, so these two timings are examples, not a benchmark.
+
+## Step 7 - Summary and submission
+
+The completed Selenium source was included in a final full run: 77 reported tests, 11 failures, 0 errors and 4 skipped optional tests. Maven took 43.806 s. The ROI uses 73 executed runs, including the 6 tutorial runs. The 4 skipped entries belong to the optional API and prepared-journey classes.
+
+The manual campaign is estimated at 75 minutes, from 25 cases at 3 minutes each. Reading the results is estimated at 5 minutes per run. Setup uses the recorded TD3a and TD3b minutes. These assumptions give a break-even point of about 0.29 runs. Maintenance and the repeated coverage of some cases make this an optimistic estimate.
+
+Detection uses the same five groups from our TD2 summary as TD3a: unit tests find 4/5, UI tests 2/5, JMeter 1/5 and the whole suite 4/5. The negative-power defect first found in TD3a is outside this TD2 denominator. The before-start state guard remains a candidate for a new unit test.
+
+A stale JMeter GUI save was found during the final check. The eight required assertions were restored and the plan was rerun after an application restart. The saved report comes from that verified run, with sample 05 as the only failed sampler.
+
+The workbook holds the report and all 25 required answers. Summary and Time and ROI are set to one A3 portrait page each. The optional worksheet titles and review file come from the teacher's pack. Their optional work was not performed.
+
+The submission ZIP contains the project, the completed workbook and the JMeter report ZIP. It excludes target and local IDE files. An extracted copy passed test-compile. Source hashes confirm that src/main, the TD3a unit tests, the tutorial class and support classes match the starting project.
