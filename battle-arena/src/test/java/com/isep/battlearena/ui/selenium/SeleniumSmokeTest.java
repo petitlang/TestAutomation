@@ -66,11 +66,9 @@ class SeleniumSmokeTest {
         driver.findElement(By.cssSelector("button.btn-start")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        // TODO 6.1: 1. wait until the URL contains "/battle"  (wait.until(ExpectedConditions.urlContains(...)))
-        //           2. click the element with id "attack-power"
-        //           3. wait until the text of the element with id "fighter2-hp-value" is "8"
-        //              (ExpectedConditions.textToBe(By.id(...), "8"))
-        //           4. check the text with assertEquals
-        // Then count the lines you needed, compared with the Playwright version (BattleFlowTest, or your tutorial test).
+        wait.until(ExpectedConditions.urlContains("/battle"));
+        driver.findElement(By.id("attack-power")).click();
+        wait.until(ExpectedConditions.textToBe(By.id("fighter2-hp-value"), "8"));
+        assertEquals("8", driver.findElement(By.id("fighter2-hp-value")).getText());
     }
 }

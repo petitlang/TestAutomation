@@ -43,3 +43,11 @@ The original plan was run in the GUI after restarting Battle Arena. All nine sam
 Added eight JSON assertions to samples 05 to 08, restarted the app and ran the plan on the command line. Sample 05 fails. The other samples pass, including sample 09 whose provided assertion accepts HTTP 500. This records the current invalid-reset behavior; the workbook discusses using 409 instead.
 
 The console counts 9 samplers and 1 error (11.11%). The JTL and dashboard also count two redirect sub-results, so they show 11 rows and 1 error (9.09%). The HTML report has been checked and is saved in `TD3b_JMeter_Report.zip`. The optional load group stays disabled.
+
+## Step 6 - Selenium and waits
+
+Completed the journey with an explicit URL wait and HP wait. Both tests passed with a visible browser and headless. A temporary expected HP of 9 caused a five-second TimeoutException with current text 8.
+
+Removed only the HP wait and repeated the journey 10 times, with a fresh browser and match each time. Nine passed; one read the old HP 100 instead of 8. The JUnit XML and class result count all 10 repetitions; Maven's final failure summary groups the repeated method under one name. Restoring the wait gave 2 passing tests again.
+
+The compared journey methods each have 7 statements. The workbook times are method times: 0.517 s for Playwright TC-P1 in the step 4 suite and 2.383 s for the headless Selenium journey. Their data and assertions differ, so these two timings are examples, not a benchmark.
