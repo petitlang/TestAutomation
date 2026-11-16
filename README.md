@@ -13,6 +13,22 @@ All seven steps of the Playwright tutorial are complete as of 2026-11-02. The UI
 
 The UI test result is **6 tests, 0 failures, 0 errors, 0 skipped**. The existing unit-test baseline is still **46 tests, 9 failures, 0 errors, 0 skipped**. The unit-test failures find the bugs left in the app for the course. Application sources under `src/main` must remain unchanged.
 
+## JMeter tutorial
+
+The nine JMeter steps were completed on 2026-11-16. The [test plan](battle-arena/jmeter/battle-arena-tutorial.jmx) runs TC-J1, checks the JSON responses, extracts Bram's HP, resets the match and then sends 200 read-only requests. See the [step-by-step notes](docs/jmeter-tutorial.md) and the [illustrated report](https://docs.google.com/document/d/1HzdIst1yTTkMrh4jc-bvMok-zqacpNQwLi7KX1cxrRM/edit).
+
+The final run has 208 samplers and 0 errors in the console. The JTL and HTML report have 210 rows because they also save the two redirect sub-results of the start request. The damage experiment with expected 85 is complete. The saved plan uses the correct value, 84.
+
+Start Battle Arena separately with JDK 17 before running JMeter. From `battle-arena`, use the path to your JMeter installation.
+
+```powershell
+$env:JAVA_HOME = 'D:\Java\jdk-17'
+New-Item -ItemType Directory -Force target/jmeter | Out-Null
+& 'D:/Downloads/td3-jmeter-tools/apache-jmeter-5.6.3/bin/jmeter.bat' -n -t jmeter/battle-arena-tutorial.jmx -l target/jmeter/run.jtl -e -o target/jmeter/run-report
+```
+
+Use a new JTL name and an empty or new report folder for each run. Results stay under `target/jmeter`. Open `target/jmeter/run-report/index.html` to read the dashboard.
+
 ## TD2 source and defect counts
 
 TD3a uses our own TD2 workbook, `TD2_BattleArena_Student_Pack_Mouzheng_Yuefan.xlsx`, by Mouzheng LI and Yuefan LIU. All 11 case IDs and titles in the TD3a selection match our TD2 table. We keep these IDs for the next steps.
