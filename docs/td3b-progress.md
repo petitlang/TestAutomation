@@ -25,3 +25,7 @@ DamageRulesTest has six rows. The extra rows are our TD2 TC-04 and TC-05, select
 Five rows pass. The Rogue row expects 37 HP but gets 40. CriticalHitTest has three rows: 74 and 76 pass, while 75 expects 0 HP and gets 15. These are the two application defects expected by the handout.
 
 Class times from the standalone runs are 18.350 s for 6 damage rows, 16.457 s for 3 critical rows and 0.350 s for 32 CombatService tests. The unit class has the same 7 known failures. The UI times include class setup and the failed assertion waits.
+
+## Step 3 - Journeys and form validation
+
+All 8 runs passed: three match journeys and five form values. The potion journey leaves Bram at 52 HP, then 6 HP, with Aria at 70 mana. The defeat and rematch journeys also pass. The form marks 101, 0 and -5 as invalid, while 1 and 100 are valid.

@@ -8,35 +8,49 @@ import com.isep.battlearena.ui.pages.BattlePage;
 import com.isep.battlearena.ui.pages.SetupPage;
 import com.isep.battlearena.ui.support.UiTestBase;
 
-/**
- * STEP 3: journeys made of several steps. The state of the match evolves, and some rules only show over time.
- * Compute every expected value from the SPECIFICATION before you run, and write the calculation in a comment.
- */
 class StatefulJourneysTest extends UiTestBase {
-
     @Test
     void thePotionIsSingleUse() {
-        // TODO 3.2: Aria is a Warrior with attack power 20.
-        //   1. tick the potion and play a Power Strike: check Bram's HP and that the potion box is unticked again;
-        //   2. Bram plays a Quick Strike (click the attack button once: the active fighter is Bram);
-        //      check the indicator says it is Aria's turn;
-        //   3. Aria plays a Power Strike WITHOUT ticking the potion: check Bram's HP, the log line,
-        //      and Aria's mana (two Power Strikes).
-        //   If the potion lasted over two attacks, which value would be different?
+        BattlePage battle = new SetupPage(page).open(baseUrl)
+                .chooseFighter1("WARRIOR", 20).startBattle();
+        battle.usePotion().powerStrike();
+        // First hit: (20 + 20) x 1.20 = 48. Bram has 52 HP.
+        assertThat(battle.fighter2Hp()).hasText("52");
+        assertThat(battle.potionBox()).not().isChecked();
+
+        battle.attack("QUICK_STRIKE");
+        assertThat(battle.indicator()).hasText("Aria's turn");
+        battle.powerStrike();
+        // Second hit: (20 + 20) x 1.15 = 46. 52 - 46 = 6 HP.
+        // Two Power Strikes cost 2 x 15 mana, leaving 70.
+        assertThat(battle.fighter2Hp()).hasText("6");
+        assertThat(battle.log()).containsText("Aria hits Bram for 46 damage.");
+        assertThat(battle.fighter1Mana()).hasText("70");
     }
 
     @Test
     void bramWinsWhenAriaFalls() {
-        // TODO 3.3: Aria is a Recruit with attack power 1, Bram keeps the default values.
-        //   Click Quick Strike four times (Aria, Bram, Aria, Bram) and check the banner shows "Bram wins the battle!".
-        //   Why four clicks, and why do you not need to know Bram's exact damage here?
+        BattlePage battle = new SetupPage(page).open(baseUrl)
+                .chooseFighter1("RECRUIT", 1).startBattle();
+        // Aria deals 11 per hit. Bram wins after his second Quick Strike.
+        battle.attack("QUICK_STRIKE").attack("QUICK_STRIKE")
+                .attack("QUICK_STRIKE").attack("QUICK_STRIKE");
+        assertThat(battle.banner()).hasText("Bram wins the battle!");
+        assertThat(battle.fighter1Hp()).hasText("0");
     }
 
     @Test
     void aRematchBringsBackTheSetupPageAndANewMatchCanStart() {
-        // TODO 3.4: Recruit with attack power 76, one Quick Strike: Aria wins (banner).
-        //   Click Rematch (BattlePage.rematch()), check the URL is the root of the application and the start button
-        //   is visible, then start a new battle and check that Bram has 100 HP.
-        //   Hint for the URL: assertThat(page).hasURL(baseUrl + "/").
+        BattlePage battle = new SetupPage(page).open(baseUrl)
+                .chooseFighter1("RECRUIT", 76).startBattle();
+        // (10 + 76) x 2 = 172 damage ends the first match.
+        battle.attack("QUICK_STRIKE");
+        assertThat(battle.banner()).hasText("Aria wins the battle!");
+
+        SetupPage setup = battle.rematch();
+        assertThat(page).hasURL(baseUrl + "/");
+        assertThat(setup.startButton()).isVisible();
+        BattlePage nextBattle = setup.startBattle();
+        assertThat(nextBattle.fighter2Hp()).hasText("100");
     }
 }
