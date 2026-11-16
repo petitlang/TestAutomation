@@ -29,3 +29,9 @@ Class times from the standalone runs are 18.350 s for 6 damage rows, 16.457 s fo
 ## Step 3 - Journeys and form validation
 
 All 8 runs passed: three match journeys and five form values. The potion journey leaves Bram at 52 HP, then 6 HP, with Aria at 70 mana. The defeat and rematch journeys also pass. The form marks 101, 0 and -5 as invalid, while 1 and 100 are valid.
+
+## Step 4 - Failure analysis
+
+The full suite reported 77 tests, 11 failures, 0 errors and 4 skipped optional tests. Of the failures, 9 are the old unit cases and 2 are the expected UI cases. Maven took 47.961 s and wrote the JaCoCo report with `-Dmaven.test.failure.ignore=true`.
+
+The saved trace responses confirm damage 85, HP 15 and criticalHit=false at power 75. The Rogue row returns damage 60 and HP 40. The screenshots and battle logs agree with those responses. The workbook links them to our TD2 defects and to the unit tests. Selenium's unfinished journey is completed and checked in step 6.
