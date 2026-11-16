@@ -35,3 +35,11 @@ All 8 runs passed: three match journeys and five form values. The potion journey
 The full suite reported 77 tests, 11 failures, 0 errors and 4 skipped optional tests. Of the failures, 9 are the old unit cases and 2 are the expected UI cases. Maven took 47.961 s and wrote the JaCoCo report with `-Dmaven.test.failure.ignore=true`.
 
 The saved trace responses confirm damage 85, HP 15 and criticalHit=false at power 75. The Rogue row returns damage 60 and HP 40. The screenshots and battle logs agree with those responses. The workbook links them to our TD2 defects and to the unit tests. Selenium's unfinished journey is completed and checked in step 6.
+
+## Step 5 - JMeter API checks
+
+The original plan was run in the GUI after restarting Battle Arena. All nine samplers were green, including sample 05 with damage 55 and Aria HP 45. The specified Rogue bonus gives round((10 + 45) x 1.05) = 58 damage and 42 HP.
+
+Added eight JSON assertions to samples 05 to 08, restarted the app and ran the plan on the command line. Sample 05 fails. The other samples pass, including sample 09 whose provided assertion accepts HTTP 500. This records the current invalid-reset behavior; the workbook discusses using 409 instead.
+
+The console counts 9 samplers and 1 error (11.11%). The JTL and dashboard also count two redirect sub-results, so they show 11 rows and 1 error (9.09%). The HTML report has been checked and is saved in `TD3b_JMeter_Report.zip`. The optional load group stays disabled.

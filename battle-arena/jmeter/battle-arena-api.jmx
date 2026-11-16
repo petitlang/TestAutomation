@@ -1,438 +1,578 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
-<hashTree>
-<TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Battle Arena: API tests (TD3b)" enabled="true">
-<stringProp name="TestPlan.comments">ISEP II.3525, TD3b. Start Battle Arena, then: jmeter -n -t jmeter/battle-arena-api.jmx -l target/jmeter/results.jtl -e -o target/jmeter/report (see README).</stringProp>
-<boolProp name="TestPlan.functional_mode">false</boolProp>
-<boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
-<elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User defined variables"><collectionProp name="Arguments.arguments"/></elementProp>
-</TestPlan>
-<hashTree>
-<ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP defaults" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables"><collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain">${__P(host,localhost)}</stringProp>
-<stringProp name="HTTPSampler.port">${__P(port,8080)}</stringProp>
-<stringProp name="HTTPSampler.protocol">http</stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path"></stringProp>
-</ConfigTestElement>
-<hashTree/>
-<ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Functional scenario (1 user)" enabled="true">
-<stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-<elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop controller">
-<boolProp name="LoopController.continue_forever">false</boolProp>
-<stringProp name="LoopController.loops">1</stringProp>
-</elementProp>
-<stringProp name="ThreadGroup.num_threads">1</stringProp>
-<stringProp name="ThreadGroup.ramp_time">1</stringProp>
-<boolProp name="ThreadGroup.scheduler">false</boolProp>
-<stringProp name="ThreadGroup.duration"></stringProp>
-<stringProp name="ThreadGroup.delay"></stringProp>
-<boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-<stringProp name="TestPlan.comments">One user only: Battle Arena handles a single match for the whole application.</stringProp>
-</ThreadGroup>
-<hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Initial state" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/state</stringProp>
-<stringProp name="HTTPSampler.method">GET</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments">Precondition: Battle Arena has just been (re)started. Otherwise restart it.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="556920499">200</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-<boolProp name="Assertion.assume_success">false</boolProp>
-<intProp name="Assertion.test_type">8</intProp>
-</ResponseAssertion>
-<hashTree/>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="matchState = NOT_STARTED" enabled="true">
-<stringProp name="JSON_PATH">$.matchState</stringProp>
-<stringProp name="EXPECTED_VALUE">NOT_STARTED</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Start the match" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"><elementProp name="f1Name" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">Aria</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f1Name</stringProp>
-</elementProp>
-<elementProp name="f1Class" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">WARRIOR</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f1Class</stringProp>
-</elementProp>
-<elementProp name="f1AttackPower" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">60</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f1AttackPower</stringProp>
-</elementProp>
-<elementProp name="f2Name" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">Bram</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f2Name</stringProp>
-</elementProp>
-<elementProp name="f2Class" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">ROGUE</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f2Class</stringProp>
-</elementProp>
-<elementProp name="f2AttackPower" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">true</boolProp>
-<stringProp name="Argument.value">45</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-<boolProp name="HTTPArgument.use_equals">true</boolProp>
-<stringProp name="Argument.name">f2AttackPower</stringProp>
-</elementProp>
-</collectionProp></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/start</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments">The server answers 302 to /battle; JMeter follows the redirect.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200 after redirect" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="556920499">200</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-<boolProp name="Assertion.assume_success">false</boolProp>
-<intProp name="Assertion.test_type">8</intProp>
-</ResponseAssertion>
-<hashTree/>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Battle page displayed" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="1676954153">fighter2-hp-value</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-<boolProp name="Assertion.assume_success">false</boolProp>
-<intProp name="Assertion.test_type">16</intProp>
-</ResponseAssertion>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Match in progress" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/state</stringProp>
-<stringProp name="HTTPSampler.method">GET</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments"></stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="matchState = IN_PROGRESS" enabled="true">
-<stringProp name="JSON_PATH">$.matchState</stringProp>
-<stringProp name="EXPECTED_VALUE">IN_PROGRESS</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram HP = 100" enabled="true">
-<stringProp name="JSON_PATH">$.fighter2.hp</stringProp>
-<stringProp name="EXPECTED_VALUE">100</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Aria plays first" enabled="true">
-<stringProp name="JSON_PATH">$.activeFighterName</stringProp>
-<stringProp name="EXPECTED_VALUE">Aria</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="04 Aria: Power Strike" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-<collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">false</boolProp>
-<stringProp name="Argument.value">{&quot;attackType&quot;:&quot;POWER_STRIKE&quot;,&quot;usePowerPotion&quot;:false}</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-</elementProp></collectionProp></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/attack</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-<stringProp name="TestPlan.comments">(20 + 60) x 1.15 = 92 damage according to the specification.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
-<collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header">
-<stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp>
-</elementProp></collectionProp></HeaderManager>
-<hashTree/>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="556920499">200</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-<boolProp name="Assertion.assume_success">false</boolProp>
-<intProp name="Assertion.test_type">8</intProp>
-</ResponseAssertion>
-<hashTree/>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Damage = 92" enabled="true">
-<stringProp name="JSON_PATH">$.lastResult.damage</stringProp>
-<stringProp name="EXPECTED_VALUE">92</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-<JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram HP = 8" enabled="true">
-<stringProp name="JSON_PATH">$.fighter2.hp</stringProp>
-<stringProp name="EXPECTED_VALUE">8</stringProp>
-<boolProp name="JSONVALIDATION">true</boolProp>
-<boolProp name="EXPECT_NULL">false</boolProp>
-<boolProp name="INVERT">false</boolProp>
-<boolProp name="ISREGEX">false</boolProp>
-</JSONPathAssertion>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="05 Bram: Quick Strike" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-<collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">false</boolProp>
-<stringProp name="Argument.value">{&quot;attackType&quot;:&quot;QUICK_STRIKE&quot;,&quot;usePowerPotion&quot;:false}</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-</elementProp></collectionProp></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/attack</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-<stringProp name="TestPlan.comments">Specification: (10 + 45) x 1.05 = 57.75, rounded to 58. The Rogue must get +5%.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
-<collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header">
-<stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp>
-</elementProp></collectionProp></HeaderManager>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="06 Aria: Power Strike (final)" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-<collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">false</boolProp>
-<stringProp name="Argument.value">{&quot;attackType&quot;:&quot;POWER_STRIKE&quot;,&quot;usePowerPotion&quot;:false}</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-</elementProp></collectionProp></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/attack</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-<stringProp name="TestPlan.comments">Bram has 8 HP: the match must end.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
-<collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header">
-<stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp>
-</elementProp></collectionProp></HeaderManager>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="07 Attack after the victory" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-<collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument">
-<boolProp name="HTTPArgument.always_encode">false</boolProp>
-<stringProp name="Argument.value">{&quot;attackType&quot;:&quot;QUICK_STRIKE&quot;,&quot;usePowerPotion&quot;:false}</stringProp>
-<stringProp name="Argument.metadata">=</stringProp>
-</elementProp></collectionProp></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/attack</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-<stringProp name="TestPlan.comments"></stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
-<collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header">
-<stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp>
-</elementProp></collectionProp></HeaderManager>
-<hashTree/>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="08 Reset" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/reset</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments">Only allowed from VICTORY or DRAW.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-</hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="09 Reset again (error case)" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/reset</stringProp>
-<stringProp name="HTTPSampler.method">POST</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments">Observed behaviour: server error 500 (unhandled exception). To discuss: 409 would be clearer.</stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 500 observed (behaviour to discuss)" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="612300854">500</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-<boolProp name="Assertion.assume_success">true</boolProp>
-<intProp name="Assertion.test_type">8</intProp>
-</ResponseAssertion>
-<hashTree/>
-</hashTree>
-<ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary report" enabled="true">
-<boolProp name="ResultCollector.error_logging">false</boolProp>
-<objProp><name>saveConfig</name><value class="SampleSaveConfiguration">
-<time>true</time><latency>true</latency><timestamp>true</timestamp><success>true</success><label>true</label><code>true</code><message>true</message><threadName>true</threadName><dataType>true</dataType><encoding>false</encoding><assertions>true</assertions><subresults>true</subresults><responseData>false</responseData><samplerData>false</samplerData><xml>false</xml><fieldNames>true</fieldNames><responseHeaders>false</responseHeaders><requestHeaders>false</requestHeaders><responseDataOnError>false</responseDataOnError><saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage><assertionsResultsToSave>0</assertionsResultsToSave><bytes>true</bytes><sentBytes>true</sentBytes><url>true</url><threadCounts>true</threadCounts><idleTime>true</idleTime><connectTime>true</connectTime>
-</value></objProp>
-<stringProp name="filename"></stringProp>
-</ResultCollector>
-<hashTree/>
-<ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View results tree" enabled="true">
-<boolProp name="ResultCollector.error_logging">false</boolProp>
-<objProp><name>saveConfig</name><value class="SampleSaveConfiguration">
-<time>true</time><latency>true</latency><timestamp>true</timestamp><success>true</success><label>true</label><code>true</code><message>true</message><threadName>true</threadName><dataType>true</dataType><encoding>false</encoding><assertions>true</assertions><subresults>true</subresults><responseData>false</responseData><samplerData>false</samplerData><xml>false</xml><fieldNames>true</fieldNames><responseHeaders>false</responseHeaders><requestHeaders>false</requestHeaders><responseDataOnError>false</responseDataOnError><saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage><assertionsResultsToSave>0</assertionsResultsToSave><bytes>true</bytes><sentBytes>true</sentBytes><url>true</url><threadCounts>true</threadCounts><idleTime>true</idleTime><connectTime>true</connectTime>
-</value></objProp>
-<stringProp name="filename"></stringProp>
-</ResultCollector>
-<hashTree/>
-</hashTree>
-<ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Light read-only load (disabled by default)" enabled="false">
-<stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-<elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop controller">
-<boolProp name="LoopController.continue_forever">false</boolProp>
-<stringProp name="LoopController.loops">10</stringProp>
-</elementProp>
-<stringProp name="ThreadGroup.num_threads">20</stringProp>
-<stringProp name="ThreadGroup.ramp_time">5</stringProp>
-<boolProp name="ThreadGroup.scheduler">false</boolProp>
-<stringProp name="ThreadGroup.duration"></stringProp>
-<stringProp name="ThreadGroup.delay"></stringProp>
-<boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-<stringProp name="TestPlan.comments">Enable it in the JMeter step: GET /api/state only, without changing the match state.</stringProp>
-</ThreadGroup>
-<hashTree>
-<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Read the state" enabled="true">
-<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User variables">
-<collectionProp name="Arguments.arguments"/></elementProp>
-<stringProp name="HTTPSampler.domain"></stringProp>
-<stringProp name="HTTPSampler.port"></stringProp>
-<stringProp name="HTTPSampler.protocol"></stringProp>
-<stringProp name="HTTPSampler.contentEncoding"></stringProp>
-<stringProp name="HTTPSampler.path">/api/state</stringProp>
-<stringProp name="HTTPSampler.method">GET</stringProp>
-<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-<boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-<stringProp name="TestPlan.comments"></stringProp>
-</HTTPSamplerProxy>
-<hashTree>
-<ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
-<collectionProp name="Asserion.test_strings"><stringProp name="556920499">200</stringProp></collectionProp>
-<stringProp name="Assertion.custom_message"></stringProp>
-<stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-<boolProp name="Assertion.assume_success">false</boolProp>
-<intProp name="Assertion.test_type">8</intProp>
-</ResponseAssertion>
-<hashTree/>
-</hashTree>
-<ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary report (load)" enabled="true">
-<boolProp name="ResultCollector.error_logging">false</boolProp>
-<objProp><name>saveConfig</name><value class="SampleSaveConfiguration">
-<time>true</time><latency>true</latency><timestamp>true</timestamp><success>true</success><label>true</label><code>true</code><message>true</message><threadName>true</threadName><dataType>true</dataType><encoding>false</encoding><assertions>true</assertions><subresults>true</subresults><responseData>false</responseData><samplerData>false</samplerData><xml>false</xml><fieldNames>true</fieldNames><responseHeaders>false</responseHeaders><requestHeaders>false</requestHeaders><responseDataOnError>false</responseDataOnError><saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage><assertionsResultsToSave>0</assertionsResultsToSave><bytes>true</bytes><sentBytes>true</sentBytes><url>true</url><threadCounts>true</threadCounts><idleTime>true</idleTime><connectTime>true</connectTime>
-</value></objProp>
-<stringProp name="filename"></stringProp>
-</ResultCollector>
-<hashTree/>
-</hashTree>
-</hashTree>
-</hashTree>
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Battle Arena: API tests (TD3b)" enabled="true">
+      <stringProp name="TestPlan.comments">ISEP II.3525, TD3b. Start Battle Arena, then: jmeter -n -t jmeter/battle-arena-api.jmx -l target/jmeter/results.jtl -e -o target/jmeter/report (see README).</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User defined variables">
+        <collectionProp name="Arguments.arguments" />
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP defaults">
+        <stringProp name="HTTPSampler.domain">${__P(host,localhost)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(port,8080)}</stringProp>
+        <stringProp name="HTTPSampler.protocol">http</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments" />
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation" />
+      </ConfigTestElement>
+      <hashTree />
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Functional scenario (1 user)" enabled="true">
+        <stringProp name="TestPlan.comments">One user only: Battle Arena handles a single match for the whole application.</stringProp>
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop controller">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Initial state" enabled="true">
+          <stringProp name="TestPlan.comments">Precondition: Battle Arena has just been (re)started. Otherwise restart it.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/state</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="matchState = NOT_STARTED" enabled="true">
+            <stringProp name="JSON_PATH">$.matchState</stringProp>
+            <stringProp name="EXPECTED_VALUE">NOT_STARTED</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Start the match" enabled="true">
+          <stringProp name="TestPlan.comments">The server answers 302 to /battle; JMeter follows the redirect.</stringProp>
+          <stringProp name="HTTPSampler.path">/start</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="f1Name" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">Aria</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f1Name</stringProp>
+              </elementProp>
+              <elementProp name="f1Class" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">WARRIOR</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f1Class</stringProp>
+              </elementProp>
+              <elementProp name="f1AttackPower" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">60</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f1AttackPower</stringProp>
+              </elementProp>
+              <elementProp name="f2Name" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">Bram</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f2Name</stringProp>
+              </elementProp>
+              <elementProp name="f2Class" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">ROGUE</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f2Class</stringProp>
+              </elementProp>
+              <elementProp name="f2AttackPower" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">45</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">f2AttackPower</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200 after redirect" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree />
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Battle page displayed" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1849380900">fighter2-hp-value</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Match in progress" enabled="true">
+          <stringProp name="HTTPSampler.path">/api/state</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="matchState = IN_PROGRESS" enabled="true">
+            <stringProp name="JSON_PATH">$.matchState</stringProp>
+            <stringProp name="EXPECTED_VALUE">IN_PROGRESS</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram HP = 100" enabled="true">
+            <stringProp name="JSON_PATH">$.fighter2.hp</stringProp>
+            <stringProp name="EXPECTED_VALUE">100</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Aria plays first" enabled="true">
+            <stringProp name="JSON_PATH">$.activeFighterName</stringProp>
+            <stringProp name="EXPECTED_VALUE">Aria</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="04 Aria: Power Strike" enabled="true">
+          <stringProp name="TestPlan.comments">(20 + 60) x 1.15 = 92 damage according to the specification.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/attack</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{"attackType":"POWER_STRIKE","usePowerPotion":false}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree />
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Damage = 92" enabled="true">
+            <stringProp name="JSON_PATH">$.lastResult.damage</stringProp>
+            <stringProp name="EXPECTED_VALUE">92</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram HP = 8" enabled="true">
+            <stringProp name="JSON_PATH">$.fighter2.hp</stringProp>
+            <stringProp name="EXPECTED_VALUE">8</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="05 Bram: Quick Strike" enabled="true">
+          <stringProp name="TestPlan.comments">Specification: (10 + 45) x 1.05 = 57.75, rounded to 58. The Rogue must get +5%.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/attack</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{"attackType":"QUICK_STRIKE","usePowerPotion":false}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram damage is 58" enabled="true">
+            <stringProp name="JSON_PATH">$.lastResult.damage</stringProp>
+            <stringProp name="EXPECTED_VALUE">58</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Aria has 42 HP" enabled="true">
+            <stringProp name="JSON_PATH">$.fighter1.hp</stringProp>
+            <stringProp name="EXPECTED_VALUE">42</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="06 Aria: Power Strike (final)" enabled="true">
+          <stringProp name="TestPlan.comments">Bram has 8 HP: the match must end.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/attack</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{"attackType":"POWER_STRIKE","usePowerPotion":false}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Match ends in victory" enabled="true">
+            <stringProp name="JSON_PATH">$.matchState</stringProp>
+            <stringProp name="EXPECTED_VALUE">VICTORY</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Aria wins" enabled="true">
+            <stringProp name="JSON_PATH">$.winnerName</stringProp>
+            <stringProp name="EXPECTED_VALUE">Aria</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Bram HP stops at zero" enabled="true">
+            <stringProp name="JSON_PATH">$.fighter2.hp</stringProp>
+            <stringProp name="EXPECTED_VALUE">0</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="07 Attack after the victory" enabled="true">
+          <stringProp name="HTTPSampler.path">/api/attack</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{"attackType":"QUICK_STRIKE","usePowerPotion":false}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON header" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Attack is refused" enabled="true">
+            <stringProp name="JSON_PATH">$.lastResult.attackPerformed</stringProp>
+            <stringProp name="EXPECTED_VALUE">false</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Reason is match not in progress" enabled="true">
+            <stringProp name="JSON_PATH">$.lastResult.failureReason</stringProp>
+            <stringProp name="EXPECTED_VALUE">MATCH_NOT_IN_PROGRESS</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="08 Reset" enabled="true">
+          <stringProp name="TestPlan.comments">Only allowed from VICTORY or DRAW.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/reset</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Reset returns not started" enabled="true">
+            <stringProp name="JSON_PATH">$.matchState</stringProp>
+            <stringProp name="EXPECTED_VALUE">NOT_STARTED</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">false</boolProp>
+          </JSONPathAssertion>
+          <hashTree />
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="09 Reset again (error case)" enabled="true">
+          <stringProp name="TestPlan.comments">Observed behaviour: server error 500 (unhandled exception). To discuss: 409 would be clearer.</stringProp>
+          <stringProp name="HTTPSampler.path">/api/reset</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 500 observed (behaviour to discuss)" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="52469">500</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree />
+        </hashTree>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename" />
+        </ResultCollector>
+        <hashTree />
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View results tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename" />
+        </ResultCollector>
+        <hashTree />
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Light read-only load (disabled by default)" enabled="false">
+        <stringProp name="TestPlan.comments">Enable it in the JMeter step: GET /api/state only, without changing the match state.</stringProp>
+        <intProp name="ThreadGroup.num_threads">20</intProp>
+        <intProp name="ThreadGroup.ramp_time">5</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop controller">
+          <stringProp name="LoopController.loops">10</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Read the state" enabled="true">
+          <stringProp name="HTTPSampler.path">/api/state</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Code 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message" />
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree />
+        </hashTree>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary report (load)" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename" />
+        </ResultCollector>
+        <hashTree />
+      </hashTree>
+    </hashTree>
+  </hashTree>
 </jmeterTestPlan>
