@@ -17,3 +17,11 @@ Generated build output is under `battle-arena/target/td3b`. The final submission
 SetupPage holds the form fields and start action. BattlePage holds the attack actions, result locators and rematch action. Assertions stay in the tests.
 
 BattleFlowTest passed both journeys. The temporary selector `button.btn-go` caused two 30-second timeouts, reported as 2 errors. Restoring `button.btn-start` in one line made both tests pass again. The tutorial has three raw uses of this selector.
+
+## Step 2 - Damage data and boundaries
+
+DamageRulesTest has six rows. The extra rows are our TD2 TC-04 and TC-05, selected here as UI integration checks for Mage and Warrior without a potion. They add coverage of the class bonuses without the potion or cap hiding them.
+
+Five rows pass. The Rogue row expects 37 HP but gets 40. CriticalHitTest has three rows: 74 and 76 pass, while 75 expects 0 HP and gets 15. These are the two application defects expected by the handout.
+
+Class times from the standalone runs are 18.350 s for 6 damage rows, 16.457 s for 3 critical rows and 0.350 s for 32 CombatService tests. The unit class has the same 7 known failures. The UI times include class setup and the failed assertion waits.
