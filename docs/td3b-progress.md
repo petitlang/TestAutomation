@@ -65,3 +65,9 @@ A stale JMeter GUI save was found during the final check. The eight required ass
 The workbook holds the report and all 25 required answers. Summary and Time and ROI are set to one A3 portrait page each. The optional worksheet titles and review file come from the teacher's pack. Their optional work was not performed.
 
 The submission ZIP contains the project, the completed workbook and the JMeter report ZIP. It excludes target and local IDE files. An extracted copy passed test-compile. Source hashes confirm that src/main, the TD3a unit tests, the tutorial class and support classes match the starting project.
+
+## Submission check
+
+A fresh copy extracted from the submission ZIP ran the full suite again: 77 tests, 11 failures, 0 errors and 4 skipped, in 45.324 seconds. The workbook keeps the earlier final run of 43.806 seconds as its ROI measurement. The JMeter dashboard and its chart pages opened without script errors.
+
+The check found that TC-04 and TC-05 were not in the old TD3a triage. The project README now records their added selection for TD3b, with two criteria for each case. The original TD3a workbook and all test code stay unchanged.

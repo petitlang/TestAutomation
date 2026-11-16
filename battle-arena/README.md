@@ -12,6 +12,17 @@ With JDK 17 and Chrome installed, run the suite with `mvnw.cmd test -Dmaven.test
 
 For JMeter, restart the app, then run `jmeter -n -t jmeter/battle-arena-api.jmx -l target/jmeter/results.jtl -e -o target/jmeter/report` from this folder. Use a new result name and report folder each time. Sample 05 fails because the specified Rogue damage is 58 while the app returns 55. The report ZIP and completed workbook are beside this project in the submission package.
 
+### Additional case selection for TD3b
+
+These two cases come from our TD2 workbook. They were not listed in the TD3a triage. We add them to the selection here for step 2, as UI checks of the form, attack request and displayed HP.
+
+| TD2 case | Level | Decision | Selection criteria | Expected result |
+| --- | --- | --- | --- | --- |
+| TC-04: Mage, Quick Strike, no potion | UI | Automate | Stable class rule; low extra effort with the existing data-driven test. | Power 50: (10 + 50) x 1.10 = 66 damage, leaving 34 HP. |
+| TC-05: Warrior, Quick Strike, no potion | UI | Automate | Frequent use of Warrior; stable class rule. | Power 50: (10 + 50) x 1.15 = 69 damage, leaving 31 HP. |
+
+The four provided rows do not isolate the Mage and Warrior bonuses without a potion. These two rows do. Unit tests remain the main checks of the calculations; the UI rows also check that the selected class and returned HP reach the page correctly.
+
 ## What this is for
 
 You will not be modifying this application (`src/main`). In TD2 you read its source code, designed test cases and reported
