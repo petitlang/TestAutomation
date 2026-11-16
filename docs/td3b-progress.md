@@ -11,3 +11,9 @@ The pack added 15 files. The first `test-compile` failed in `SeleniumSmokeTest.j
 The tutorial JMeter plan had local changes saved by JMeter. They add saved defaults and change the XML layout. The requests, data, expected damage 84 and reset remain the same.
 
 Generated build output is under `battle-arena/target/td3b`. The final submission includes the JMeter HTML report as a separate ZIP.
+
+## Step 1 - Page Objects
+
+SetupPage holds the form fields and start action. BattlePage holds the attack actions, result locators and rematch action. Assertions stay in the tests.
+
+BattleFlowTest passed both journeys. The temporary selector `button.btn-go` caused two 30-second timeouts, reported as 2 errors. Restoring `button.btn-start` in one line made both tests pass again. The tutorial has three raw uses of this selector.

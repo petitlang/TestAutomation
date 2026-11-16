@@ -8,24 +8,30 @@ import com.isep.battlearena.ui.pages.BattlePage;
 import com.isep.battlearena.ui.pages.SetupPage;
 import com.isep.battlearena.ui.support.UiTestBase;
 
-/** STEP 1: journeys written with the Page Objects. */
 class BattleFlowTest extends UiTestBase {
-
     @Test
     void aWarriorUsingAPotionIsCappedAtTwentyPercent() {
-        // TODO 1.10: rewrite YOUR tutorial test of TC-P1 with the Page Objects (Warrior, attack power 40,
-        //   potion, Power Strike). Keep its five assertions: Bram's HP (28), the log line, Aria's mana (85),
-        //   the potion box unticked, the turn indicator ("Bram's turn"). It should read like a scenario:
-        //   BattlePage battle = new SetupPage(page).open(baseUrl).chooseFighter1(...).startBattle();
-        //   battle.usePotion().powerStrike();
-        //   assertThat(battle.fighter2Hp()).hasText("28");
-        //   ...
+        BattlePage battle = new SetupPage(page).open(baseUrl)
+                .chooseFighter1("WARRIOR", 40).startBattle();
+        battle.usePotion().powerStrike();
+
+        // (20 + 40) x 1.20 = 72 damage. Mana cost is 15.
+        assertThat(battle.fighter2Hp()).hasText("28");
+        assertThat(battle.log()).containsText("Aria hits Bram for 72 damage.");
+        assertThat(battle.fighter1Mana()).hasText("85");
+        assertThat(battle.potionBox()).not().isChecked();
+        assertThat(battle.indicator()).hasText("Bram's turn");
     }
 
     @Test
     void aVictoryShowsTheBannerWithTheWinnerName() {
-        // TODO 1.11: Recruit (RECRUIT) with attack power 76, one Quick Strike (QUICK_STRIKE).
-        //   Calculation: (10 + 76) = 86, critical hit x 2 = 172 damage: Bram falls in one blow.
-        //   Check Bram's HP (the floor is 0), that the banner is visible and shows "Aria wins the battle!".
+        BattlePage battle = new SetupPage(page).open(baseUrl)
+                .chooseFighter1("RECRUIT", 76).startBattle();
+        battle.attack("QUICK_STRIKE");
+
+        // (10 + 76) x 2 = 172 damage. HP stops at zero.
+        assertThat(battle.fighter2Hp()).hasText("0");
+        assertThat(battle.banner()).isVisible();
+        assertThat(battle.banner()).hasText("Aria wins the battle!");
     }
 }
