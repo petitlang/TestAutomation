@@ -1,0 +1,50 @@
+// REVIEW EXERCISE (step 9, part B). This file is NOT compiled (.txt extension).
+// It imitates a test produced by a generative AI assistant from this prompt:
+// "Write Playwright tests in Java for Battle Arena: a Rogue Quick Strike and the potion."
+// Your mission: review it like a code reviewer. Find what is wrong, classify each problem
+// (locator, wait, oracle, structure, isolation, missing assertion) and record it in your review log.
+
+import com.microsoft.playwright.*;
+import org.junit.jupiter.api.*;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+public class BattleArenaGeneratedTest {
+
+    @Test
+    void testRogueQuickStrike() throws Exception {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch();
+        Page page = browser.newPage();
+
+        page.navigate("http://localhost:8080");
+        page.selectOption("select[name='f1Class']", "ROGUE");
+        page.fill("input[name='f1AttackPower']", "50");
+        page.click("button.btn-start");
+        Thread.sleep(2000);
+
+        page.click("#btn-quick-strike");
+        Thread.sleep(1000);
+
+        String hp = page.locator("//div[2]/section[2]/div[1]/span").textContent();
+        Assertions.assertEquals("40", hp);
+    }
+
+    @Test
+    void testPowerPotionBonus() throws Exception {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch();
+        Page page = browser.newPage();
+
+        page.navigate("http://localhost:8080");
+        page.selectOption("select[name='f1Class']", "RECRUIT");
+        page.fill("input[name='f1AttackPower']", "50");
+        page.click("button.btn-start");
+        Thread.sleep(2000);
+
+        // The potion adds 15% damage: (10 + 50) x 1.15 = 69 damage, 31 HP left
+        page.check("#use-potion-checkbox");
+        page.click("#attack-quick");
+        Thread.sleep(1000);
+    }
+}

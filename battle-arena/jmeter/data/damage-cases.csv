@@ -1,0 +1,7 @@
+caseId,characterClass,attackPower,attackType,potion,expectedDamage
+C01,MAGE,50,FIREBALL,true,96
+C02,WARRIOR,50,POWER_STRIKE,true,84
+C03,ROGUE,50,QUICK_STRIKE,false,
+C04,RECRUIT,75,QUICK_STRIKE,false,
+C05,mage,50,FIREBALL,false,
+C06,RECRUIT,50,POWER_STRIKE,false,
