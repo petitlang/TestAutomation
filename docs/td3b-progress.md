@@ -71,3 +71,9 @@ The submission ZIP contains the project, the completed workbook and the JMeter r
 A fresh copy extracted from the submission ZIP ran the full suite again: 77 tests, 11 failures, 0 errors and 4 skipped, in 45.324 seconds. The workbook keeps the earlier final run of 43.806 seconds as its ROI measurement. The JMeter dashboard and its chart pages opened without script errors.
 
 The check found that TC-04 and TC-05 were not in the old TD3a triage. The project README now records their added selection for TD3b, with two criteria for each case. The original TD3a workbook and all test code stay unchanged.
+
+## Workbook answer check
+
+Checked all 25 required answers against the questions again. Added details on the Maven phase, selector repair, cost per test, unit coverage, failure messages and defects hidden by the UI or controllers. The Playwright wrong-HP example now uses the saved tutorial experiment: expected 25, received 28.
+
+The completed workbook is also saved directly in the Lab3b folder. The unchanged teacher template is in its teacher-originals folder. Questions Q8.1 to Q9.2 stay empty because the optional steps were not performed, as the Questions sheet instructs.
